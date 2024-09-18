@@ -253,7 +253,7 @@ options {
     allow-update { none; };
   };
   ```
-  -```/var/named/qtm.org.zone```
+  ```/var/named/qtm.org.zone```
   ```sh
   $ORIGIN qtm.org.
   $TTL 1d
@@ -328,7 +328,7 @@ zone "ktpm.cntt.dhsg" IN {
 ```sh
 $ORIGIN ktpm.cntt.dhsg.
 $TTL 1d
-@    IN    SOA    ns1.ktpm.cntt.dhsg. admin.ktpm.cntt.dhsg. (
+@    IN    SOA    ns2 .ktpm.cntt.dhsg. admin.ktpm.cntt.dhsg. (
         2024091801  ; Serial
         1w          ; Refresh
         2h          ; Retry
