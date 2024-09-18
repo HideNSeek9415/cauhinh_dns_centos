@@ -154,7 +154,6 @@ zone "bth.dkp.sgu" IN {
   ns2  IN  A     192.168.1.2
 
   @    IN  A     192.168.1.1
-  @    IN  A     192.168.1.2
   ```
   - ```/var/named/reverse.192.168.1.0```
   ```sh
