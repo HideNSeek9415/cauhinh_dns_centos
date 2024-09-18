@@ -73,7 +73,6 @@ zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
 ### 3. Tạo các file record cho các zone
 - Truy cập các tệp theo đường dẫn đã định nghĩa tại các zone và tạo record
   - file ```/var/named/bth.dkp.sgu.zone``` cho ```bth.dkp.sgu```
-  
   ```sh
   $ORIGIN bth.dkp.sgu.
   $TTL 1d
@@ -157,7 +156,6 @@ zone "bth.dkp.sgu" IN {
   @    IN  A     192.168.1.2
   ```
   - ```/var/named/reverse.192.168.1.0```
-
   ```sh
   $ORIGIN bth.dkp.sgu.
   $TTL 1d
@@ -220,7 +218,7 @@ systemctl restart named
 ### 1. Chuẩn bị
 - Các yêu cầu chuẩn bị cũng giống với cấu hình Backup DNS Server, với 2 máy chủ có IP là:
   - Server 1: ```192.168.1.1```
-  - Server 1: ```192.168.1.3```
+  - Server 2: ```192.168.1.3```
 ### 2. Thiết lập Forwarder giữa 2 server
 #### Server 1
 - Thiết lập tại ```/etc/named.conf```
@@ -236,7 +234,7 @@ options {
 ```
 - Ta có thể tạm tắt tính năng Security của Linux, giúp cho việc trao đổi truy vấn DNS sẽ chạy ổn định hơn. 
   - ```/etc/sysconfig/selinux```
-  
+
   ```
   ...
   SELINUX=disabled
@@ -254,7 +252,6 @@ options {
   };
   ```
   -```/var/named/qtm.org.zone```
-  
   ```sh
   $ORIGIN qtm.org.
   $TTL 1d
@@ -296,7 +293,6 @@ zone "cntt.dhsg" IN {
 };
 ```
 - Tệp ```/var/named/cntt.dhsg.zone```
-
 ```sh
 $ORIGIN cntt.dhsg.
 $TTL 1d
@@ -327,7 +323,6 @@ zone "ktpm.cntt.dhsg" IN {
 };
 ```
 - Tệp ```/var/named/ktpm.cntt.dhsg.zone```
-
 ```sh
 $ORIGIN ktpm.cntt.dhsg.
 $TTL 1d
@@ -347,3 +342,4 @@ lnhp      IN  A     192.168.1.11
 ntd       IN  A     192.168.1.22
 ohmygoat  IN  A     10.10.10.10
 ```
+- Sau khi hoàn thành, ```systemctl restart named``` để khởi động lại server và dùng ```nslookup``` trên main server để kiểm tra phân quyền
