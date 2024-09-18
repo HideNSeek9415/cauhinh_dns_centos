@@ -49,27 +49,27 @@ DNS1=192.168.1.1
 ## II. Cấu hình DNS cơ bản trong Linux Server
 ### 1. Cấu hình BIND
 - Cấu hình tệp tin ```/etc/named.conf```
-```Python
+```C++
 options {
-  listen-on port 53 { 127.0.0.1; 192.168.1.1;}; # Lắng nghe ở địa chỉ Host
-  #listen-on-v6 port 53 { ::1; };               # Không sử dụng IPv6
-  allow-query { localhost; 192.168.1.0/24; }    # Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
+  listen-on port 53 { 127.0.0.1; 192.168.1.1;}; // Lắng nghe ở địa chỉ Host
+  //listen-on-v6 port 53 { ::1; };              // Không sử dụng IPv6
+  allow-query { localhost; 192.168.1.0/24; }    // Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
   ...
 }
 ```
 ### 2. Khai báo zone
 - Định nghĩa các vùng phân giải xuôi và phân giải ngược trong tệp ```/etc/named.rfc1912.zones```
-```Python
-zone "bth.dkp.sgu" IN {             # Khai báo tên miền cần quản lý
-  type master;                      # Đây là máy chủ phân giải chính
-  file "bth.dkp.sgu.zone";          # Tên file lưu trữ record.
-  allow-update { none; };           # không cho phép tự động update
+```C++
+zone "bth.dkp.sgu" IN {             // Khai báo tên miền cần quản lý
+  type master;                      // Đây là máy chủ phân giải chính
+  file "bth.dkp.sgu.zone";          // Tên file lưu trữ record.
+  allow-update { none; };           // không cho phép tự động update
 };
 
-zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
-  type master;                      # Đây là máy chủ phân giải chính
-  file "reverse.192.168.1.0";       # Tên file lưu trữ record.
-  allow-update { none; };           # không cho phép tự động update
+zone "1.168.192.in-addr.arpa" IN {  // Khai báo zone của lớp 192.168.1.0
+  type master;                      // Đây là máy chủ phân giải chính
+  file "reverse.192.168.1.0";       // Tên file lưu trữ record.
+  allow-update { none; };           // không cho phép tự động update
 };
 ```
 ### 3. Tạo các file record cho các zone
@@ -127,7 +127,7 @@ systemctl start named
 - Cấu hình địa chỉ IP của server backup thành 192.168.1.2
 ### 2. Cấu hình Main Server
 - Trên file cấu hình BIND ```/etc/named.conf/```, thiết lập thông số
-```Python
+```C++
 options {             
   ...
   allow-transfer { localhost; 192.168.1.2; }; # Cho phép trao đổi dữ liệu giữa main server và bk server
@@ -182,28 +182,28 @@ systemctl start named
 ```
 ### 3. Cấu hình Backup Server
 - Cấu hình tệp tin ```/etc/named.conf```
-```Python
+```C++
 optiona {
-  listen-on port 53 { 127.0.0.1; 192.168.1.2;}; # Lắng nghe ở địa chỉ Host
-  #listen-on-v6 port 53 { ::1; };               # Không sử dụng IPv6
-  allow-query { localhost; 192.168.1.0/24; }    # Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
-  allow-transfer { localhost; 192.168.1.1; };   # Cho phép trao đổi dữ liệu giữa main server và bk server
+  listen-on port 53 { 127.0.0.1; 192.168.1.2;}; // Lắng nghe ở địa chỉ Host
+  //listen-on-v6 port 53 { ::1; };              // Không sử dụng IPv6
+  allow-query { localhost; 192.168.1.0/24; }    // Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
+  allow-transfer { localhost; 192.168.1.1; };   // Cho phép trao đổi dữ liệu giữa main server và bk server
   ...
 }
 ```
 - Thiết lập các vùng backup: ```/etc/named.rfc1912.zones```
-```Python
+```C++
 ...
-zone "bth.dkp.sgu" IN {             # Khai báo tên miền cần quản lý
-  type slave;                       # Đây là máy chủ backup
-  file "slaves/bth.dkp.sgu.zone";   # Tên file backup.
-  masters { 192.168.1.1; };         # Định nghĩa máy chủ chính
+zone "bth.dkp.sgu" IN {             // Khai báo tên miền cần quản lý
+  type slave;                       // Đây là máy chủ backup
+  file "slaves/bth.dkp.sgu.zone";   // Tên file backup.
+  masters { 192.168.1.1; };         // Định nghĩa máy chủ chính
 };
 
-zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
-  type slave;                       # Đây là máy chủ backup
-  file "slaves/reverse.192.168.1.0";# Tên file backup.
-  masters { 192.168.1.1; };         # Định nghĩa máy chủ chính
+zone "1.168.192.in-addr.arpa" IN {  // Khai báo zone của lớp 192.168.1.0
+  type slave;                       // Đây là máy chủ backup
+  file "slaves/reverse.192.168.1.0";// Tên file backup.
+  masters { 192.168.1.1; };         // Định nghĩa máy chủ chính
 };
 ```
 - Khởi động dịch vụ DNS
@@ -222,7 +222,7 @@ systemctl restart named
 ### 2. Thiết lập Forwarder giữa 2 server
 #### Server 1
 - Thiết lập tại ```/etc/named.conf```
-```Python
+```C++
 options {
   ...
   forwarders { 192.168.1.3; };  # Thiết lập forwarder là 192.168.1.3
@@ -244,7 +244,7 @@ options {
 - Thiết lập tương tự như Server 1
 - Cấu hình zone để kiểm tra trên Server 1
   ```/etc/named.rfc1912.zones```
-  ```Python
+  ```C++
   zone "qtm.org" IN {     
     type master;            
     file "qtm.org.zone";
@@ -284,7 +284,7 @@ systemctl restart named
 
 ### 1. Thiết lập trên Main Server
 - Tệp ```/etc/named.rfc1912.zones```
-```Python
+```C++
 zone "cntt.dhsg" IN {     
   type master;            
   file "cntt.dhsg.zone";
@@ -314,7 +314,7 @@ ns2  IN  A     192.168.1.2
 ```
 ### 2. Thiết lập trên Server được phân quyền
 - Tệp ```/etc/named.rfc1912.zones```
-```Python
+```C++
 zone "ktpm.cntt.dhsg" IN {     
   type master;            
   file "ktpm.cntt.dhsg.zone";
