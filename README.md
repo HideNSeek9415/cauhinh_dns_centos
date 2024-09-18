@@ -23,6 +23,7 @@
 ## I. Hướng dẫn chuẩn bị
 ### 1. Fix lỗi gói yum không thể sử dụng
 - Hãy chắc chắn trên VM có thể kết nối mạng bên ngoài
+![](./nat.png)
 - Truy cập vào file ```/etc/yum.repos.d/CentOS-Base.repo```
 - Uncomment các dòng bắt đầu bằng ```#baseurl``` -> ```baseurl```
 - Thay đổi đường dẫn từ ```http://mirrorlist.centos.org``` -> ```https://vault.centos.org```
@@ -122,6 +123,7 @@ systemctl start named
 ### 1. Chuẩn bị
 - Chuẩn bị sẵn gói BIND trên server backup
 - Chuyển đổi Network Adapter trên cả 2 server trong VM thành ```VMNET1 (Host-only)```
+![](./mnnet1.png)
 - Cấu hình địa chỉ IP của server backup thành 192.168.1.2
 ### 2. Cấu hình Main Server
 - Trên file cấu hình BIND ```/etc/named.conf/```, thiết lập thông số
@@ -342,4 +344,4 @@ lnhp      IN  A     192.168.1.11
 ntd       IN  A     192.168.1.22
 ohmygoat  IN  A     10.10.10.10
 ```
-- Sau khi hoàn thành, ```systemctl restart named``` để khởi động lại server và dùng ```nslookup``` trên main server để kiểm tra phân quyền
+- Sau khi hoàn thành, ```systemctl restart named``` để khởi động lại service và dùng ```nslookup``` trên main server để kiểm tra phân quyền
