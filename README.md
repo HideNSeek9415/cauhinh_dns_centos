@@ -32,6 +32,7 @@
 ### 2. Cài đặt mạng và để cài gói bind (Với giao diện dòng lệnh)
 - Truy cập vào file ```/etc/sysconfig/network-scripts/ifcfg-ens33```
 - Cấu hình ```BOOTPROTO=dhcp```
+- Khởi động lại dịch vụ mạng: ```systemctl restart network.service```
 - Tiến hành cài đặt gói bind để cấu hình DNS: ```yum install bind* -y```
 ### 3. Cài đặt lại IP tĩnh để tiến hành cấu hình DNS Server
 - Truy cập vào file ```/etc/sysconfig/network-scripts/ifcfg-ens33``` và tiến hành cấu hình:
