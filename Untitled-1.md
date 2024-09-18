@@ -89,7 +89,7 @@ zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
   ns1  IN  A     192.168.1.1
   ```
   - file ```/var/named/reverse.192.168.1.0``` cho ```1.168.192.in-addr.arpa```
-  
+
   ```sh
   $ORIGIN bth.dkp.sgu.
   $TTL 1d
@@ -342,3 +342,4 @@ lnhp      IN  A     192.168.1.11
 ntd       IN  A     192.168.1.22
 ohmygoat  IN  A     10.10.10.10
 ```
+- Sau khi hoàn thành, ```systemctl restart named``` để khởi động lại server và dùng ```nslookup``` trên main server để kiểm tra phân quyền
