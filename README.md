@@ -92,7 +92,6 @@ zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
   - file ```/var/named/reverse.192.168.1.0``` cho ```1.168.192.in-addr.arpa```
 
   ```sh
-  $ORIGIN bth.dkp.sgu.
   $TTL 1d
   @    IN    SOA    ns1.bth.dkp.sgu. admin.bth.dkp.sgu. (
           2024091801  ; Serial
