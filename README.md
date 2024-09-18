@@ -289,7 +289,7 @@ zone "cntt.dhsg" IN {
   type master;            
   file "cntt.dhsg.zone";
   allow-update { none; };
-  allow-query { none; };
+  allow-query { any; };
 };
 ```
 - Tệp ```/var/named/cntt.dhsg.zone```
@@ -319,7 +319,7 @@ zone "ktpm.cntt.dhsg" IN {
   type master;            
   file "ktpm.cntt.dhsg.zone";
   allow-update { none; };
-  allow-query { none; };
+  allow-query { any; };
 };
 ```
 - Tệp ```/var/named/ktpm.cntt.dhsg.zone```
