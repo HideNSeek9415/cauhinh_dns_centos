@@ -106,7 +106,7 @@ zone "1.168.192.in-addr.arpa" IN {  # Khai báo zone của lớp 192.168.1.0
   1    IN  PTR   bth.dkp.sgu. 
   ```
 ### 4. Khởi động dịch vụ DNS 
-- Để tránh việc bị chẳn, hãy tắt firewall để DNS hoạt động
+- Để tránh việc bị chặn, hãy tắt firewall để DNS hoạt động
 ```
 firewall-cmd --permanent --zone=public --add-service=dns
 firewall-cmd --reload
@@ -127,7 +127,7 @@ systemctl start named
 ### 2. Cấu hình Main Server
 - Trên file cấu hình BIND ```/etc/named.conf/```, thiết lập thông số
 ```Python
-zone "bth.dkp.sgu" IN {             
+options {             
   ...
   allow-transfer { localhost; 192.168.1.2; }; # Cho phép trao đổi dữ liệu giữa main server và bk server
   ...       
@@ -157,7 +157,6 @@ zone "bth.dkp.sgu" IN {
   ```
   - ```/var/named/reverse.192.168.1.0```
   ```sh
-  $ORIGIN bth.dkp.sgu.
   $TTL 1d
   @    IN    SOA    ns1.bth.dkp.sgu. admin.bth.dkp.sgu. (
           2024091801  ; Serial
