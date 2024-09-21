@@ -262,7 +262,7 @@ options {
           4w          ; Expire
           1d          ; Minimum TTL
   )
-  @    IN  NS    ns1.qtm.org.sgu.
+  @    IN  NS    ns1.qtm.org.
   @    IN  A     192.168.1.3
   ns1  IN  A     192.168.1.3
   ```
