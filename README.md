@@ -186,7 +186,7 @@ systemctl start named
 options {
   listen-on port 53 { 127.0.0.1; 192.168.1.2;}; // Lắng nghe ở địa chỉ Host
   //listen-on-v6 port 53 { ::1; };              // Không sử dụng IPv6
-  allow-query { localhost; 192.168.1.0/24; }    // Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
+  allow-query { localhost; 192.168.1.0/24; };   // Cho phép truy vấn ở dải địa chỉ 192.168.1.0/24
   allow-transfer { localhost; 192.168.1.1; };   // Cho phép trao đổi dữ liệu giữa main server và bk server
   ...
 }
